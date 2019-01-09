@@ -14,6 +14,8 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 	
+	
+	//Retorna null caso não seja localizado nenhum objeto
 	public Categoria buscar(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElse(null);

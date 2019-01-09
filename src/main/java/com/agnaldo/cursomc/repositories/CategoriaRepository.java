@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.agnaldo.cursomc.domain.Categoria;
 
+//Interface para implementação do JPA, que instanciando a mesma é possivel trabalhar com o banco de dados
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 	

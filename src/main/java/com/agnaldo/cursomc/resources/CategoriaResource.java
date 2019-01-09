@@ -20,6 +20,7 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 	
+	//Com base no número de ID recebido via URL retorna os valores na tela
 	@RequestMapping(value="/{id}",  method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id)
 	{
