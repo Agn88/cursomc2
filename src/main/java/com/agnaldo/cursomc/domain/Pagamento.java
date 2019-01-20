@@ -37,7 +37,7 @@ public abstract class Pagamento implements Serializable {
 	}
 
 	public Integer getId() {
-		return id;
+		return id; 
 	}
 
 	public void setId(Integer id) {
