@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,21 +26,28 @@ public class Pedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instance;
 	
+	//@JsonIgnore
+	//@JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
 	
+
+
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	
+	//Relacionamento muitos para um
 	@ManyToOne
 	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
 	
-	//Comando Set para garantir que não havera item repetido nos itens do pedido
+	//Relacionamento Um para Muitos
+	//Aqui o Id é o ItemPedidoPK(foi instanciado como id dentro da classe ItemPedido), e de dentro dele pegamos o pedido
 	@OneToMany(mappedBy="id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
 	
@@ -71,7 +82,7 @@ public class Pedido implements Serializable {
 		this.instance = instance;
 	}
 
-
+	
 	public Pagamento getPagamento() {
 		return pagamento;
 	}
@@ -100,6 +111,17 @@ public class Pedido implements Serializable {
 	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
+	
+	
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+
+	
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
+	}
+	
 
 
 	@Override
@@ -110,15 +132,7 @@ public class Pedido implements Serializable {
 		return result;
 	}
 	
-
-	public Set<ItemPedido> getItens() {
-		return itens;
-	}
-
-
-	public void setItens(Set<ItemPedido> itens) {
-		this.itens = itens;
-	}
+	
 	
 
 

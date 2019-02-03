@@ -11,6 +11,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.agnaldo.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -22,6 +24,9 @@ public abstract class Pagamento implements Serializable {
 	private Integer estado;
 	
 	
+	//@JsonManagedReference
+	@JsonIgnore
+	//Informa que o ID do pagador é o mesmo que o ID do pedido
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId
@@ -44,6 +49,7 @@ public abstract class Pagamento implements Serializable {
 		this.id = id;
 	}
 
+	
 	public EstadoPagamento getEstado() {
 		return EstadoPagamento.toEnum(estado);
 	}
