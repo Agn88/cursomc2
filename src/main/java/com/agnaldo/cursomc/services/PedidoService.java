@@ -17,7 +17,7 @@ public class PedidoService {
 	
 	
 	//Retorna null caso não seja localizado nenhum objeto
-	public Pedido buscar(Integer id) {
+	public Pedido find(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
