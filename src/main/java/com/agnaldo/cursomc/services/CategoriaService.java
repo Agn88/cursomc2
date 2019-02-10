@@ -3,8 +3,6 @@ package com.agnaldo.cursomc.services;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -39,7 +37,8 @@ public class CategoriaService {
 	
 	public Categoria update(Categoria obj)
 	{
-		find(obj.getId());
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
 		return repo.save(obj);
 	}
 	
@@ -75,6 +74,10 @@ public class CategoriaService {
 		return new Categoria(objDto.getId(), objDto.getNome());
 	}
 	
+	private void updateData(Categoria newObj, Categoria obj)
+	{
+		newObj.setNome(obj.getNome());
+	}
 }
 
 
