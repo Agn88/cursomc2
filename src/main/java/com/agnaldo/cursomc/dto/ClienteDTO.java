@@ -32,6 +32,7 @@ public class ClienteDTO implements Serializable {
 		nome = obj.getNome();
 		email = obj.getEmail();
 	}
+	
 
 	public Integer getId() {
 		return id;
