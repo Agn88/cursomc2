@@ -20,7 +20,7 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository repo;
-	
+
 	@Autowired
 	private BoletoService boletoService;
 
@@ -32,14 +32,13 @@ public class PedidoService {
 
 	@Autowired
 	private ProdutoService produtoService;
-	
-	
-	//Retorna null caso não seja localizado nenhum objeto
+
 	public Pedido find(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);
-		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
-	
+
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
@@ -59,5 +58,4 @@ public class PedidoService {
 		itemPedidoRepository.saveAll(obj.getItens());
 		return obj;
 	}
-	
 }

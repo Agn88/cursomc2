@@ -1,5 +1,4 @@
 package com.agnaldo.cursomc.services;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,26 +19,19 @@ public class ProdutoService {
 
 	@Autowired
 	private ProdutoRepository repo;
-	
+
 	@Autowired
-	private CategoriaRepository categoriaReposity;
-	
-	
-	//Retorna null caso não seja localizado nenhum objeto
+	private CategoriaRepository categoriaRepository;
+
 	public Produto find(Integer id) {
 		Optional<Produto> obj = repo.findById(id);
-		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));
-	}
-	
-	
-	
-	public Page<Produto> search(String nome, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction){
-		PageRequest pageRequest = new PageRequest(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		List<Categoria> categorias = categoriaReposity.findAllById(ids);
-		
-		return repo.findDistinctByNomeContainingAndCategoriasIn(nome, categorias, pageRequest);
-		
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));
 	}
 
-	
+	public Page<Produto> search(String nome, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		List<Categoria> categorias = categoriaRepository.findAllById(ids);
+		return repo.findDistinctByNomeContainingAndCategoriasIn(nome, categorias, pageRequest);	
+	}
 }

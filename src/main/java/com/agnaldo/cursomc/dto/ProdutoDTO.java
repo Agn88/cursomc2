@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 import com.agnaldo.cursomc.domain.Produto;
 
-public class ProdutoDTO implements Serializable{
-	private static final long serialVersionUID = 1;
+public class ProdutoDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	
 	private Integer id;
 	private String nome;
@@ -43,6 +44,5 @@ public class ProdutoDTO implements Serializable{
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-	
 	
 }
