@@ -1,18 +1,14 @@
 package com.agnaldo.cursomc.domain;
-
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
-//Para dizer que vai ser um subtipo
 @Embeddable
-public class ItemPedidoPK implements Serializable{
-
+public class ItemPedidoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@ManyToOne
 	@JoinColumn(name="pedido_id")
 	private Pedido pedido;
@@ -20,6 +16,7 @@ public class ItemPedidoPK implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="produto_id")
 	private Produto produto;
+	
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -31,9 +28,6 @@ public class ItemPedidoPK implements Serializable{
 	}
 	public void setProduto(Produto produto) {
 		this.produto = produto;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	@Override
 	public int hashCode() {
@@ -64,7 +58,6 @@ public class ItemPedidoPK implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 	
 	

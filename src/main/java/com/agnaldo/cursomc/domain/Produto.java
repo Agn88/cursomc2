@@ -1,5 +1,4 @@
 package com.agnaldo.cursomc.domain;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,7 +17,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Produto implements Serializable {
+public class Produto  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -27,25 +26,20 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	
-	//Como a ligação entre Categorias e Produtos a associação é as duas por muitos, cria-se com o comando abaixo uma tabela intermediaria
 	@JsonIgnore
-	//Anotacao para definir relaciomaneot muitos para muitos, cria uma endidade chamada Produto_Categoria
-	//onde ela faz o join do produto_id onde ele for igual ao categoria_id
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA",
 		joinColumns = @JoinColumn(name = "produto_id"),
 		inverseJoinColumns = @JoinColumn(name = "categoria_id")
-			)
+	)
 	private List<Categoria> categorias = new ArrayList<>();
 	
-	
-	//Comando Set para garantir que não havera item repetido nos itens do pedido
 	@JsonIgnore
 	@OneToMany(mappedBy="id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
 	
-	
-	public Produto() {}
+	public Produto() {
+	}
 
 	public Produto(Integer id, String nome, Double preco) {
 		super();
@@ -55,16 +49,14 @@ public class Produto implements Serializable {
 	}
 
 	@JsonIgnore
-	public List<Pedido> getPedidos()
-	{
+	public List<Pedido> getPedidos() {
 		List<Pedido> lista = new ArrayList<>();
-		
-		for (ItemPedido x: itens)
-		{
+		for (ItemPedido x : itens) {
 			lista.add(x.getPedido());
 		}
 		return lista;
 	}
+	
 	
 	public Integer getId() {
 		return id;
@@ -106,7 +98,6 @@ public class Produto implements Serializable {
 		this.itens = itens;
 	}
 	
-		
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -131,7 +122,6 @@ public class Produto implements Serializable {
 			return false;
 		return true;
 	}
+	
 
-	
-	
 }

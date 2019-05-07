@@ -1,4 +1,5 @@
 package com.agnaldo.cursomc.services;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,13 +17,13 @@ import com.agnaldo.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ProdutoService {
-
+	
 	@Autowired
 	private ProdutoRepository repo;
-
+	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
-
+	
 	public Produto find(Integer id) {
 		Optional<Produto> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
