@@ -31,9 +31,13 @@ public class AnotacoesProjeto {
 	 * mysql --host=us-cdbr-iron-east-02.cleardb.net --user=bb04c58435af8e --password=0fa65ac2 --reconnect heroku_4ebec8ec2b1aafb < arquivo.sql
 	 * 
 	 * 
+	 * OBS: Deve-se exportar o .SQL com o comando: 
+	 * mysqldump -u root -p curso_spring > arquivo.sql
 	 * 
 	 * 
 	 * 
+	 * Enviando projeto para Heroku (produção):
+	 * git push heroku master
 	 * 
 	 * 
 	 * 
